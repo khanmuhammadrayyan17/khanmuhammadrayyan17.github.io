@@ -3,194 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Rayyan Khan | Full-Stack Developer</title>
+    <title>Muhammad Rayyan Khan | Terminal</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600&display=swap');
+
         :root {
-            --bg-color: #0d1117;
-            --surface-color: #161b22;
-            --accent-color: #58a6ff;
-            --text-main: #c9d1d9;
+            --bg-base: #0a0a0c;
+            --bg-surface: #121318;
+            --bg-panel: #1a1c23;
+            --border-dim: #2d313f;
+            --border-bright: #4b526d;
+            --text-main: #e2e8f0;
             --text-muted: #8b949e;
-            --border-color: #30363d;
-            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --accent-primary: #00e5ff; /* Cyan hardware accent */
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-sans: 'Inter', sans-serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-base);
             color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            padding: 2rem 1rem;
+            font-family: var(--font-sans);
+            line-height: 1.5;
+            padding: 2rem;
+            /* Subtle technical grid background */
+            background-image: 
+                linear-gradient(var(--bg-surface) 1px, transparent 1px),
+                linear-gradient(90deg, var(--bg-surface) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
 
-        .container {
-            max-width: 850px;
+        .sys-container {
+            max-width: 1100px;
             margin: 0 auto;
-            border: 1px solid var(--border-color);
-            background: var(--surface-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        header {
-            padding: 3rem;
-            border-bottom: 1px solid var(--border-color);
-            background: linear-gradient(135deg, #1c2128 0%, #161b22 100%);
-        }
-
-        h1 { font-size: 2.5rem; color: #fff; margin-bottom: 0.5rem; letter-spacing: -1px; }
-
-        .subtitle {
-            font-family: var(--font-mono);
-            color: var(--accent-color);
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.5rem;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
+            grid-template-columns: 320px 1fr;
+            gap: 1.5rem;
         }
 
-        .cite { color: var(--text-muted); font-size: 0.75rem; vertical-align: super; margin-left: 2px; }
+        .panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-dim);
+            padding: 2rem;
+            position: relative;
+        }
 
-        section { padding: 2.5rem 3rem; border-bottom: 1px solid var(--border-color); }
+        /* Industrial corner brackets */
+        .panel::before, .panel::after {
+            content: ''; position: absolute; width: 8px; height: 8px; border: 1px solid var(--accent-primary);
+        }
+        .panel::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+        .panel::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+        h1 {
+            font-family: var(--font-sans);
+            font-size: 1.8rem;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .sys-title {
+            font-family: var(--font-mono);
+            color: var(--accent-primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: inline-block;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 0.5rem;
+            width: 100%;
+        }
 
         h2 {
             font-family: var(--font-mono);
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            color: var(--accent-color);
-            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 1.2rem;
             display: flex;
             align-items: center;
         }
 
-        h2::after { content: ""; height: 1px; flex-grow: 1; background: var(--border-color); margin-left: 1rem; }
+        h2::before {
+            content: ">>";
+            color: var(--accent-primary);
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
 
-        .skill-group { margin-bottom: 1rem; }
-        .skill-label { font-weight: bold; color: #fff; margin-right: 0.5rem; }
+        /* Left Sidebar styling */
+        .contact-list { list-style: none; margin-bottom: 2.5rem; }
+        .contact-list li {
+            margin-bottom: 0.8rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            color: var(--text-muted);
+        }
+        .contact-list a { color: var(--text-main); text-decoration: none; margin-left: 0.5rem; transition: color 0.2s; }
+        .contact-list a:hover { color: var(--accent-primary); }
 
-        .card-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
-        h3 { color: #fff; font-size: 1.1rem; }
-        .date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); }
+        .skills-grid { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
+        .skill-cat { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-primary); margin-bottom: 0.3rem; text-transform: uppercase; }
+        .skill-items { font-size: 0.85rem; color: var(--text-main); }
 
-        .tags { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-color); margin-bottom: 0.75rem; }
+        /* Right Content styling */
+        .summary { font-size: 0.95rem; margin-bottom: 3rem; color: #cbd5e1; }
+
+        .timeline-item, .project-card { margin-bottom: 2.5rem; position: relative; }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px dashed var(--border-dim);
+            padding-bottom: 0.3rem;
+        }
+
+        h3 { font-size: 1.1rem; font-weight: 600; color: #fff; }
+        
+        .meta-data { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-primary); }
+        
+        .tech-stack {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 0.8rem;
+            display: block;
+        }
 
         ul { list-style: none; }
-        li { position: relative; padding-left: 1.2rem; margin-bottom: 0.5rem; font-size: 0.95rem; }
-        li::before { content: "→"; position: absolute; left: 0; color: var(--accent-color); }
+        li.bullet {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+        li.bullet::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--border-bright);
+        }
 
-        a { color: inherit; text-decoration: none; transition: color 0.2s; }
-        a:hover { color: var(--accent-color); }
+        /* Subtle Citations */
+        .cite {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--border-bright);
+            vertical-align: super;
+            margin-left: 2px;
+            user-select: none;
+        }
 
-        @media (max-width: 600px) {
-            header, section { padding: 1.5rem; }
-            h1 { font-size: 1.8rem; }
-            .card-header { flex-direction: column; }
+        @media (max-width: 900px) {
+            .sys-container { grid-template-columns: 1fr; }
+            body { padding: 1rem; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Muhammad Rayyan Khan <span class="cite">[cite: 2]</span></h1>
-        <div class="subtitle">Backend-focused Full-Stack Developer <span class="cite">[cite: 6]</span></div>
-        <div class="contact-grid">
-            <div>📍 Lahore, Pakistan <span class="cite">[cite: 1]</span></div>
-            <div>📧 <a href="mailto:khanmuhammadrayyan17@gmail.com">khanmuhammadrayyan17@gmail.com</a> <span class="cite">[cite: 2]</span></div>
-            <div>📞 +92-336-8795366 <span class="cite">[cite: 5]</span></div>
-            <div>🔗 <a href="https://linkedin.com/in/muhammad-rayyan-khan-1a435222b">LinkedIn</a> <span class="cite">[cite: 3]</span></div>
-            <div>💻 <a href="https://github.com/khanmuhammadrayyan17">GitHub</a> <span class="cite">[cite: 5]</span></div>
-        </div>
-    </header>
+<div class="sys-container">
+    <div class="panel">
+        <h1>Muhammad<br>Rayyan Khan</h1>
+        <div class="sys-title">Backend-focused Full-Stack</div>
 
-    <section>
-        <h2>Summary</h2>
-        <p>Backend-focused Full-Stack Developer (Node.js, NestJS, PostgreSQL) with experience building scalable REST APIs, real-time WebSocket applications, and AI-integrated tools <span class="cite">[cite: 6]</span>. Final-year CS student at LUMS with three shipped projects including a live trading simulator and an AI email platform <span class="cite">[cite: 7, 10]</span>.</p>
-    </section>
+        <ul class="contact-list">
+            <li>[LOC] <span style="margin-left:0.5rem; color:var(--text-main)">Lahore, Pakistan</span><span class="cite">[1]</span></li>
+            <li>[EML] <a href="mailto:khanmuhammadrayyan17@gmail.com">khanmuhammadrayyan...</a><span class="cite">[2]</span></li>
+            <li>[TEL] <span style="margin-left:0.5rem; color:var(--text-main)">+92-336-8795366</span><span class="cite">[5]</span></li>
+            <li>[LNK] <a href="https://linkedin.com/in/muhammad-rayyan-khan-1a435222b">LinkedIn</a><span class="cite">[3]</span></li>
+            <li>[GIT] <a href="https://github.com/khanmuhammadrayyan17">GitHub</a><span class="cite">[5]</span></li>
+        </ul>
 
-    <section>
-        <h2>Technical Skills</h2>
-        <div class="skill-group">
-            <span class="skill-label">Backend:</span> Node.js, NestJS, Express, FastAPI, REST APIs, WebSockets, Prisma <span class="cite">[cite: 13]</span>
-        </div>
-        <div class="skill-group">
-            <span class="skill-label">Frontend:</span> React, Next.js, TailwindCSS <span class="cite">[cite: 13]</span>
-        </div>
-        <div class="skill-group">
-            <span class="skill-label">Databases:</span> PostgreSQL, MongoDB, Supabase <span class="cite">[cite: 14]</span>
-        </div>
-        <div class="skill-group">
-            <span class="skill-label">Languages/Tools:</span> TypeScript, Python, C/C++, SQL, Git, Docker, Postman <span class="cite">[cite: 15]</span>
-        </div>
-    </section>
-
-    <section>
-        <h2>Experience</h2>
-        <div style="margin-bottom: 2rem;">
-            <div class="card-header">
-                <h3>Freelance Web Developer</h3>
-                <span class="date">2025 – Remote <span class="cite">[cite: 19]</span></span>
+        <h2>Specs / Skills</h2>
+        <div class="skills-grid">
+            <div>
+                <div class="skill-cat">Backend Ecosystem</div>
+                <div class="skill-items">Node.js, NestJS, Express, FastAPI, REST APIs, WebSockets, Prisma <span class="cite">[13]</span></div>
             </div>
-            <ul>
-                <li>Built and deployed a responsive Next.js landing page for a US-based plumbing business <span class="cite">[cite: 20]</span>.</li>
-                <li>Collaborated with US-based sales partners for active business pitching <span class="cite">[cite: 21]</span>.</li>
-            </ul>
-        </div>
-        <div>
-            <div class="card-header">
-                <h3>Open Source Contributor</h3>
-                <span class="date">KanaDojo (PR #7315) <span class="cite">[cite: 22]</span></span>
+            <div>
+                <div class="skill-cat">Frontend Architecture</div>
+                <div class="skill-items">React, Next.js, TailwindCSS <span class="cite">[13]</span></div>
             </div>
-            <ul>
-                <li>Added Japanese cultural etiquette content following strict JSON schema requirements <span class="cite">[cite: 23]</span>.</li>
-                <li>Managed professional contribution workflows including conventional commits and CI/CD validation <span class="cite">[cite: 24]</span>.</li>
-            </ul>
+            <div>
+                <div class="skill-cat">Database Management</div>
+                <div class="skill-items">PostgreSQL, MongoDB, Supabase <span class="cite">[14]</span></div>
+            </div>
+            <div>
+                <div class="skill-cat">Languages & Tooling</div>
+                <div class="skill-items">TypeScript, Python, C/C++, SQL, Git, Docker, Postman <span class="cite">[15]</span></div>
+            </div>
         </div>
-    </section>
 
-    <section>
-        <h2>Projects</h2>
-        <div style="margin-bottom: 2rem;">
-            <h3>Gamified Trading Simulator <span class="cite">[cite: 26]</span></h3>
-            <div class="tags">NestJS • PostgreSQL • WebSockets • Prisma <span class="cite">[cite: 26]</span></div>
-            <ul>
-                <li>Built real-time backend supporting live portfolio tracking and instant trade execution <span class="cite">[cite: 28]</span>.</li>
-                <li>Optimized SQL aggregation queries for leaderboards, significantly reducing computation time <span class="cite">[cite: 29]</span>.</li>
-            </ul>
-        </div>
-        <div style="margin-bottom: 2rem;">
-            <h3>DigiMail AI Email Manager <span class="cite">[cite: 30]</span></h3>
-            <div class="tags">Next.js • Gmail API • OpenAI <span class="cite">[cite: 30]</span></div>
-            <ul>
-                <li>Integrated GPT-powered summarization, cutting average email reading time by ~60% <span class="cite">[cite: 32]</span>.</li>
-                <li>Implemented caching and retry logic to improve Gmail API reliability <span class="cite">[cite: 32]</span>.</li>
-            </ul>
-        </div>
-        <div>
-            <h3>Point of Sale System <span class="cite">[cite: 34]</span></h3>
-            <div class="tags">Node.js • Express • MongoDB <span class="cite">[cite: 34]</span></div>
-            <ul>
-                <li>Developed a full-featured POS with billing, inventory tracking, and sales reports <span class="cite">[cite: 35]</span>.</li>
-                <li>Implemented role-based access control and MongoDB indexing for high-speed queries <span class="cite">[cite: 38]</span>.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section style="border:none;">
         <h2>Education</h2>
-        <div class="card-header">
-            <h3>B.S. Computer Science</h3>
-            <span class="date">Expected 2026 <span class="cite">[cite: 18]</span></span>
+        <div>
+            <h3 style="font-size:0.95rem;">B.S. Computer Science</h3>
+            <div class="meta-data" style="margin-top:0.2rem; color:var(--text-muted);">Expected 2026 <span class="cite">[18]</span></div>
+            <div style="font-size:0.85rem; margin-top:0.4rem;">Lahore University of Management Sciences (LUMS) <span class="cite">[10]</span></div>
         </div>
-        <div class="location">Lahore University of Management Sciences (LUMS) <span class="cite">[cite: 10]</span></div>
-    </section>
+    </div>
+
+    <div class="panel">
+        <h2>System Output / Summary</h2>
+        <div class="summary">
+            Backend-focused Full-Stack Developer (Node.js, NestJS, PostgreSQL) with experience building scalable REST APIs, real-time WebSocket applications, and AI-integrated tools<span class="cite">[6]</span>. Final-year CS student at LUMS with three shipped projects including a live trading simulator and an AI email platform<span class="cite">[7, 10]</span>.
+        </div>
+
+        <h2>Runtime Experience</h2>
+        
+        <div class="timeline-item">
+            <div class="item-header">
+                <h3>Freelance Web Developer</h3>
+                <span class="meta-data">2025 – Remote <span class="cite">[19]</span></span>
+            </div>
+            <ul>
+                <li class="bullet">Built and deployed a responsive Next.js landing page for a US-based plumbing business<span class="cite">[20]</span>.</li>
+                <li class="bullet">Collaborated with US-based sales partners for active business pitching<span class="cite">[21]</span>.</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item" style="margin-bottom: 3rem;">
+            <div class="item-header">
+                <h3>Open Source Contributor</h3>
+                <span class="meta-data">KanaDojo (PR #7315) <span class="cite">[22]</span></span>
+            </div>
+            <ul>
+                <li class="bullet">Added Japanese cultural etiquette content following strict JSON schema requirements<span class="cite">[23]</span>.</li>
+                <li class="bullet">Managed professional contribution workflows including conventional commits and CI/CD validation<span class="cite">[24]</span>.</li>
+            </ul>
+        </div>
+
+        <h2>Deployed Modules / Projects</h2>
+
+        <div class="project-card">
+            <div class="item-header">
+                <h3>Gamified Trading Simulator <span class="cite">[26]</span></h3>
+            </div>
+            <span class="tech-stack">[NestJS] [PostgreSQL] [WebSockets] [Prisma] <span class="cite">[26]</span></span>
+            <ul>
+                <li class="bullet">Built real-time backend supporting live portfolio tracking and instant trade execution<span class="cite">[28]</span>.</li>
+                <li class="bullet">Optimized SQL aggregation queries for leaderboards, significantly reducing computation time<span class="cite">[29]</span>.</li>
+            </ul>
+        </div>
+
+        <div class="project-card">
+            <div class="item-header">
+                <h3>DigiMail AI Email Manager <span class="cite">[30]</span></h3>
+            </div>
+            <span class="tech-stack">[Next.js] [Gmail API] [OpenAI] <span class="cite">[30]</span></span>
+            <ul>
+                <li class="bullet">Integrated GPT-powered summarization, cutting average email reading time by ~60%<span class="cite">[32]</span>.</li>
+                <li class="bullet">Implemented caching and retry logic to improve Gmail API reliability<span class="cite">[32]</span>.</li>
+            </ul>
+        </div>
+
+        <div class="project-card" style="margin-bottom: 0;">
+            <div class="item-header">
+                <h3>Point of Sale System <span class="cite">[34]</span></h3>
+            </div>
+            <span class="tech-stack">[Node.js] [Express] [MongoDB] <span class="cite">[34]</span></span>
+            <ul>
+                <li class="bullet">Developed a full-featured POS with billing, inventory tracking, and sales reports<span class="cite">[35]</span>.</li>
+                <li class="bullet">Implemented role-based access control and MongoDB indexing for high-speed queries<span class="cite">[38]</span>.</li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 </body>
